@@ -1,8 +1,9 @@
 service:
-  name: aws-nodejs-typescript
+  name: quotebot-ui
 
 # Add the serverless-webpack plugin
 plugins:
+  - serverless-finch
   - serverless-webpack
   - serverless-offline
 
@@ -16,7 +17,43 @@ functions:
     events:
       - http:
           method: ANY
-          path: /
-      - http:
-          method: ANY
-          path: /{proxy+}
+          path: /api/{proxy+}
+
+resources:
+  Resources:
+    ProxyResource:
+      Type: AWS::ApiGateway::Resource
+      Properties:
+        ParentId:
+          Fn::GetAtt:
+            - ApiGatewayRestApi
+            - RootResourceId
+        PathPart: app
+        RestApiId:
+          Ref: ApiGatewayRestApi
+    ProxyMethod:
+      Type: AWS::ApiGateway::Method
+      Properties:
+        ResourceId:
+          Ref: ProxyResource
+        RestApiId:
+          Ref: ApiGatewayRestApi
+        HttpMethod: GET
+        AuthorizationType: NONE
+        MethodResponses:
+          - StatusCode: 200
+            ResponseParameters:
+              "method.response.header.Content-Type": true
+        Integration:
+          IntegrationHttpMethod: GET
+          Type: HTTP
+          Uri: http://quotebot-ui-static-angular-app.s3-website-us-east-1.amazonaws.com
+          IntegrationResponses:
+            - StatusCode: 200
+              ResponseParameters:
+                "method.response.header.Content-Type": "'text/html'"
+
+custom:
+  client:
+    bucketName: quotebot-ui-static-angular-app
+    distributionFolder: 'dist'

@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
+import quoteRouter from './api/quotes';
 
 class AppServer {
     public express: express.Application;
@@ -22,11 +23,7 @@ class AppServer {
         let router = express.Router();
 
 
-        router.get('/', (req, res) => {
-            res.json({
-                message: 'This is the root route!'
-            });
-        });
+        router.use('/', express.static('dist'));
 
         router.get('/hello', (req, res) => {
             res.json({
@@ -35,6 +32,7 @@ class AppServer {
         });
 
         this.express.use('/', router);
+        this.express.use('/api/quotes', quoteRouter);
     }
 }
 
