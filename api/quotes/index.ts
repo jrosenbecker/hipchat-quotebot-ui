@@ -1,7 +1,7 @@
 import {Router, Request, Response} from 'express';
 
 class QuoteRouter {
-    router: Router
+    router: Router;
 
     constructor() {
         this.router = Router();
@@ -11,7 +11,7 @@ class QuoteRouter {
     private init(): void {
         this.router.get('/getAll', (req: Request, res: Response) => {
             res.json({
-                message: "Quote getAll method"
+                message: 'Quote getAll method'
             });
         });
     }

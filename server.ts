@@ -20,9 +20,7 @@ class AppServer {
     }
 
     private routes(): void {
-        let router = express.Router();
-
-
+        const router = express.Router();
         router.use('/', express.static('dist'));
 
         router.get('/hello', (req, res) => {

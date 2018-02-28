@@ -12,58 +12,34 @@ provider:
   runtime: nodejs6.10
 
 functions:
-  hello:
+  api:
     handler: handler.handler
     events:
+      - http:
+          method: ANY
+          path: /{proxy+}
       - http:
           method: ANY
           path: /api/{proxy+}
 
 resources:
   Resources:
-    ProxyResource:
-      Type: AWS::ApiGateway::Resource
-      Properties:
-        ParentId:
-          Fn::GetAtt:
-            - ApiGatewayRestApi
-            - RootResourceId
-        PathPart: app
-        RestApiId:
-          Ref: ApiGatewayRestApi
-    ProxyMethod:
-      Type: AWS::ApiGateway::Method
-      Properties:
-        ResourceId:
-          Ref: ProxyResource
-        RestApiId:
-          Ref: ApiGatewayRestApi
-        HttpMethod: GET
-        AuthorizationType: NONE
-        MethodResponses:
-          - StatusCode: 200
-            ResponseParameters:
-              "method.response.header.Content-Type": true
-        Integration:
-          IntegrationHttpMethod: GET
-          Type: HTTP
-          Uri: http://quotebot-ui-static-angular-app.s3-website-us-east-1.amazonaws.com
-          IntegrationResponses:
-            - StatusCode: 200
-              ResponseParameters:
-                "method.response.header.Content-Type": "'text/html'"
     CloudFrontDistribution:
       Type: AWS::CloudFront::Distribution
       Properties:
         DistributionConfig:
           Origins:
-            - DomainName: quotebot-ui-static-angular-app.s3-website-us-east-1.amazonaws.com
+            - DomainName: ${self:custom.client.bucketName}.s3-website-${self:custom.myRegion}.amazonaws.com
               Id: quotebot-static-s3-site
               CustomOriginConfig:
                 HTTPPort: '80'
                 HTTPSPort: '443'
                 OriginProtocolPolicy: http-only
-            - DomainName: bok5fjezib.execute-api.us-east-1.amazonaws.com
+            - DomainName: 
+                Fn::Join: 
+                  - ''
+                  - - Ref: ApiGatewayRestApi
+                    - .execute-api.${self:custom.myRegion}.amazonaws.com
               OriginPath: '/dev'
               Id: quotebot-ui-api
               CustomOriginConfig: 
@@ -76,6 +52,8 @@ resources:
               PathPattern: "/api/*"
               ViewerProtocolPolicy: redirect-to-https
               MinTTL: '0'
+              MaxTTL: '30'
+              DefaultTTL: '30'
               AllowedMethods:
                 - HEAD
                 - GET
@@ -90,6 +68,8 @@ resources:
             TargetOriginId: quotebot-static-s3-site
             ViewerProtocolPolicy: redirect-to-https
             MinTTL: '0'
+            MaxTTL: '30'
+            DefaultTTL: '30'
             AllowedMethods:
               - HEAD
               - GET
@@ -104,6 +84,7 @@ resources:
           DefaultRootObject: index.html
 
 custom:
+  myRegion: ${opt:region, 'us-east-1'}
   client:
     bucketName: quotebot-ui-static-angular-app
     distributionFolder: 'dist'
