@@ -1,0 +1,17 @@
+.icon-link-container {
+    cursor: pointer;
+    height: 100%;
+}
+
+.icon-link-container:hover {
+    background-color:rgba(0, 0, 0, 0.1);
+}
+
+.icon-link-title {
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.icon-link-description {
+    font-size: 12pt;
+}
