@@ -52,6 +52,56 @@ resources:
             - StatusCode: 200
               ResponseParameters:
                 "method.response.header.Content-Type": "'text/html'"
+    CloudFrontDistribution:
+      Type: AWS::CloudFront::Distribution
+      Properties:
+        DistributionConfig:
+          Origins:
+            - DomainName: quotebot-ui-static-angular-app.s3-website-us-east-1.amazonaws.com
+              Id: quotebot-static-s3-site
+              CustomOriginConfig:
+                HTTPPort: '80'
+                HTTPSPort: '443'
+                OriginProtocolPolicy: http-only
+            - DomainName: bok5fjezib.execute-api.us-east-1.amazonaws.com
+              OriginPath: '/dev'
+              Id: quotebot-ui-api
+              CustomOriginConfig: 
+                HTTPPort: '80'
+                HTTPSPort: '443'
+                OriginProtocolPolicy: https-only
+          Enabled: 'true'
+          CacheBehaviors:
+            - TargetOriginId: quotebot-ui-api
+              PathPattern: "/api/*"
+              ViewerProtocolPolicy: redirect-to-https
+              MinTTL: '0'
+              AllowedMethods:
+                - HEAD
+                - GET
+              CachedMethods:
+                - HEAD
+                - GET
+              ForwardedValues:
+                QueryString: 'true'
+                Cookies:
+                  Forward: none
+          DefaultCacheBehavior:
+            TargetOriginId: quotebot-static-s3-site
+            ViewerProtocolPolicy: redirect-to-https
+            MinTTL: '0'
+            AllowedMethods:
+              - HEAD
+              - GET
+            ForwardedValues:
+              QueryString: 'true'
+              Cookies:
+                Forward: none
+          PriceClass: PriceClass_200
+          ViewerCertificate:
+            CloudFrontDefaultCertificate: 'true'
+            MinimumProtocolVersion: 'TLSv1'
+          DefaultRootObject: index.html
 
 custom:
   client:
