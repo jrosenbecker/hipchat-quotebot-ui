@@ -14,6 +14,10 @@ provider:
 functions:
   api:
     handler: handler.handler
+    environment:
+      DYNAMODB_ACCESS_KEY: ${file(./serverless.variables.yml):DYNAMODB_ACCESS_KEY}
+      DYNAMODB_SECRET: ${file(./serverless.variables.yml):DYNAMODB_SECRET}
+      DYNAMODB_REGION: ${file(./serverless.variables.yml):DYNAMODB_REGION}
     events:
       - http:
           method: ANY
