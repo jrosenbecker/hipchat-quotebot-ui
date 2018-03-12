@@ -17,19 +17,22 @@ export class HomeComponent {
         this.randomIconLinkConfig = {
             icon: 'casino',
             title: 'Random Quotes',
-            description: 'A full screen display that will cycle between random quotes every few seconds'
+            description: 'A full screen display that will cycle between random quotes every few seconds',
+            href: '/random'
         };
 
         this.searchIconLinkConfig = {
             icon: 'search',
             title: 'Search Quotes',
-            description: 'Search for quotes by person or content'
+            description: 'Search for quotes by person or content',
+            href: '/search'
         };
 
         this.addIconLinkConfig = {
             icon: 'add',
             title: 'Add Quote',
-            description: 'Add quotes from somebody in the office'
+            description: 'Add quotes from somebody in the office',
+            href: '/add'
         };
     }
 }

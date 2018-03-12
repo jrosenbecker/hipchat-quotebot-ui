@@ -24,6 +24,15 @@ class QuoteRouter {
                 throw err;
             });
         });
+
+        this.router.get('/getRandom', (req: Request, res: Response) => {
+            return this._quotesDataService.getRandomQuote().then((data) => {
+                return res.json(data);
+            }).catch((err) => {
+                console.error(err);
+                throw err;
+            });
+        });
     }
 }
 

@@ -4,7 +4,8 @@
   "description": "Serverless webpack example using Typescript",
   "main": "handler.js",
   "scripts": {
-    "start": "concurrently --kill-others \"serverless offline start\" \"ng build -w\"",
+    "start": "concurrently --kill-others \"nodemon --config nodemon.json\" \"ng build -w\"",
+    "start:serverless": "serverless offline start",
     "debug": "node --debug ./node_modules/.bin/serverless offline -s dev",
     "deploy": "del-cli dist --force && ng build --no-sourcemap && serverless client deploy && serverless deploy -v",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,10 +28,17 @@
     "dynamodb-doc": "^1.0.0",
     "express": "^4.16.2",
     "hammerjs": "^2.0.8",
+    "http": "0.0.0",
+    "https": "^1.0.0",
     "jquery": "^3.3.1",
     "materialize-css": "^0.100.2",
+    "moment": "^2.21.0",
     "morgan": "^1.9.0",
+    "path": "^0.12.7",
+    "random-number": "0.0.9",
+    "request": "^2.85.0",
     "rxjs": "^5.5.6",
+    "xml2js": "^0.4.19",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {
@@ -42,6 +50,7 @@
     "@types/jasmine": "~2.8.3",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "^8.0.57",
+    "@types/request": "^2.47.0",
     "codelyzer": "^4.0.1",
     "concurrently": "^3.5.1",
     "del-cli": "^1.1.0",
@@ -52,6 +61,7 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "nodemon": "^1.17.1",
     "protractor": "~5.1.2",
     "serverless-finch": "^1.4.0",
     "serverless-offline": "^3.18.0",

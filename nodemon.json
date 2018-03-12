@@ -1,0 +1,6 @@
+{
+    "verbose": true,
+    "ext": "ts",
+    "ignore": ["node_modules/*", "src/*"],
+    "exec": "npm run start:serverless"
+}

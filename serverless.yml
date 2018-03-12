@@ -18,6 +18,10 @@ functions:
       DYNAMODB_ACCESS_KEY: ${file(./serverless.variables.yml):DYNAMODB_ACCESS_KEY}
       DYNAMODB_SECRET: ${file(./serverless.variables.yml):DYNAMODB_SECRET}
       DYNAMODB_REGION: ${file(./serverless.variables.yml):DYNAMODB_REGION}
+      FLICKR_KEY: ${file(./serverless.variables.yml):FLICKR_KEY}
+      FLICKR_SECRET: ${file(./serverless.variables.yml):FLICKR_SECRET}
+      FLICKR_USER_ID: ${file(./serverless.variables.yml):FLICKR_USER_ID}
+      FLICKR_PHOTOSET_ID: ${file(./serverless.variables.yml):FLICKR_PHOTOSET_ID}
     events:
       - http:
           method: ANY
