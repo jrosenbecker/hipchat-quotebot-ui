@@ -1,8 +1,8 @@
 {
   "name": "Madison Quotes",
   "short_name": "Quotes",
-  "theme_color": "#f32121",
-  "background_color": "#f32121",
+  "theme_color": "#00235b",
+  "background_color": "#00235b",
   "display": "fullscreen",
   "Scope": "/",
   "start_url": "/random",
