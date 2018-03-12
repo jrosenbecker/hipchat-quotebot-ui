@@ -1,11 +1,11 @@
 <div class="random-container">
-    <div class="valign-wrapper max-height image-container" [ngStyle]="backgroundImageStyle(backgroundImage1)" (click)="changeImage()" [@crossfade]="state1">
+    <div class="valign-wrapper max-height image-container" [ngStyle]="backgroundImageStyle(backgroundImage1)" [@crossfade]="state1">
     <div class="row">
             <div class="col s12 center quote" >{{quote1?.quote}}</div>
     </div>
         
     </div>
-    <div class="valign-wrapper max-height image-container" [ngStyle]="backgroundImageStyle(backgroundImage2)" (click)="changeImage(backgroundImage2)" [@crossfade]="state2">
+    <div class="valign-wrapper max-height image-container" [ngStyle]="backgroundImageStyle(backgroundImage2)" [@crossfade]="state2">
         <div class="row">
             <div class="col s12 center quote" >{{quote2?.quote}}</div>
         </div>
