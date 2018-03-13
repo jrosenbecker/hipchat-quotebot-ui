@@ -84,7 +84,7 @@ resources:
               QueryString: 'true'
               Cookies:
                 Forward: none
-          PriceClass: PriceClass_200
+          PriceClass: PriceClass_100
           ViewerCertificate:
             CloudFrontDefaultCertificate: 'true'
             MinimumProtocolVersion: 'TLSv1'
