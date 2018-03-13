@@ -60,8 +60,8 @@ resources:
               PathPattern: "/api/*"
               ViewerProtocolPolicy: redirect-to-https
               MinTTL: '0'
-              MaxTTL: '30'
-              DefaultTTL: '30'
+              MaxTTL: '0'
+              DefaultTTL: '0'
               AllowedMethods:
                 - HEAD
                 - GET
@@ -76,8 +76,8 @@ resources:
             TargetOriginId: quotebot-static-s3-site
             ViewerProtocolPolicy: redirect-to-https
             MinTTL: '0'
-            MaxTTL: '30'
-            DefaultTTL: '30'
+            MaxTTL: '0'
+            DefaultTTL: '0'
             AllowedMethods:
               - HEAD
               - GET

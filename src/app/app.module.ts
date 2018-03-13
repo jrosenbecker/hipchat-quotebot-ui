@@ -1,6 +1,7 @@
 import 'materialize-css';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/observable/forkJoin';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
