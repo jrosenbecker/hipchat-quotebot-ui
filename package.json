@@ -1,7 +1,7 @@
 {
-  "name": "aws-nodejs-typescript",
+  "name": "hipchat-quotebot-ui",
   "version": "1.0.0",
-  "description": "Serverless webpack example using Typescript",
+  "description": "Cycles through quotes overlayed on top of images",
   "main": "handler.js",
   "scripts": {
     "start": "concurrently --kill-others \"nodemon --config nodemon.json\" \"ng build -w\"",
@@ -63,6 +63,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "nodemon": "^1.17.1",
     "protractor": "~5.1.2",
+    "serverless": "^1.26.1",
     "serverless-finch": "^1.4.0",
     "serverless-offline": "^3.18.0",
     "serverless-webpack": "^4.0.0",
