@@ -12,17 +12,6 @@ const awsDynamoClient = new AWS.DynamoDB();
 const docClient = new DOC.DynamoDB(awsDynamoClient);
 
 export class QuotesDataService {
-    getAllQuotes() {
-        return docClient.scan({
-            TableName: 'Quotes'
-        }).promise().then((data) => {
-            return data.Items;
-        }).catch(err => {
-            console.log(err);
-            throw err;
-        });
-    }
-
     getRandomQuote() {
         return awsDynamoClient.scan({
             TableName: 'Quotes'
@@ -35,6 +24,9 @@ export class QuotesDataService {
                 integer: true
             });
             return items[index];
+        }).catch(err => {
+            console.error(err);
+            throw err;
         });
     }
 }

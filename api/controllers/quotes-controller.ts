@@ -1,5 +1,5 @@
 import {Router, Request, Response} from 'express';
-import { QuotesDataService } from '../../services/quotes-data-service';
+import { QuotesDataService } from '../services/quotes-data-service';
 
 class QuoteRouter {
     router: Router;
@@ -16,15 +16,6 @@ class QuoteRouter {
     }
 
     private registerRoutes(): void {
-        this.router.get('/getAll', (req: Request, res: Response) => {
-            return this._quotesDataService.getAllQuotes().then((data) => {
-                return res.json(data);
-            }).catch((err) => {
-                console.error(err);
-                throw err;
-            });
-        });
-
         this.router.get('/getRandom', (req: Request, res: Response) => {
             return this._quotesDataService.getRandomQuote().then((data) => {
                 return res.json(data);

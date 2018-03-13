@@ -1,6 +1,6 @@
 import { APIGatewayEvent, Callback, Context, Handler } from 'aws-lambda';
 import * as awsServerlessExpress from 'aws-serverless-express';
-import appServer from './server';
+import appServer from './api';
 
 const server = awsServerlessExpress.createServer(appServer);
 
