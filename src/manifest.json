@@ -5,7 +5,7 @@
   "background_color": "#00235b",
   "display": "fullscreen",
   "Scope": "/",
-  "start_url": "/random",
+  "start_url": "/",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",
