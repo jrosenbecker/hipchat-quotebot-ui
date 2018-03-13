@@ -1,12 +1,14 @@
-<app-header-component></app-header-component>
-<div class="row">
-    <div class="col s4 center">
-        <app-icon-link [config]="addIconLinkConfig"></app-icon-link>
+<div class="random-container" (dblclick)="updateOnDoubleClick()">
+    <div class="valign-wrapper max-height image-container" [ngStyle]="backgroundImageStyle(backgroundImage1)" [@crossfade]="state1">
+    <div class="row">
+            <div class="col s12 center quote" >{{quote1?.quote}}</div>
     </div>
-    <div class="col s4 center">
-        <app-icon-link [config]="randomIconLinkConfig"></app-icon-link>
+        
     </div>
-    <div class="col s4 center">
-        <app-icon-link [config]="searchIconLinkConfig"></app-icon-link>
+    <div class="valign-wrapper max-height image-container" [ngStyle]="backgroundImageStyle(backgroundImage2)" [@crossfade]="state2">
+        <div class="row">
+            <div class="col s12 center quote" >{{quote2?.quote}}</div>
+        </div>
     </div>
 </div>
+ 
