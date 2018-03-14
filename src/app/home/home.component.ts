@@ -18,12 +18,20 @@ const TRANSITION_TIME_SECONDS = 2;
             state('hide', style({opacity: 0})),
             transition('* => show', animate(`${TRANSITION_TIME_SECONDS}s ease-in`)),
             transition('show => hide', animate(`${TRANSITION_TIME_SECONDS}s ease-out`))
+        ]),
+        trigger('zoom', [
+            state('inactive', style({transform: 'scale(1)'})),
+            state('active', style({transform: 'scale(2)'})),
+            transition('inactive => active', animate('300s ease-in')),
+            transition('active => inactive', animate('0s ease-out'))
         ])
     ]
 })
 export class HomeComponent implements OnInit {
     state1 = 'hide';
     state2 = 'hide';
+    zoom1 = 'inactive';
+    zoom2 = 'inactive';
     quote1: Quote;
     quote2: Quote;
     backgroundImage1: Photo;
@@ -47,6 +55,8 @@ export class HomeComponent implements OnInit {
             this.state1 = 'show';
             this.state2 = 'hide';
 
+            this.zoom1 = 'active';
+
             // Wait for the animation to finish and then set the second quote
             this.getQuoteAndImageAfterTransition().subscribe(quote2Values => {
                 this.quote2 = quote2Values[0];
@@ -68,20 +78,24 @@ export class HomeComponent implements OnInit {
         if (this.state1 === 'show') {
             this.state1 = 'hide';
             this.state2 = 'show';
+            this.zoom2 = 'active';
 
             // After transition ends set the text/image for the hidden quote
             this.getQuoteAndImageAfterTransition().subscribe(values => {
                 this.quote1 = values[0];
                 this.backgroundImage1 = values[1];
+                this.zoom1 = 'inactive';
             });
         } else {
             this.state1 = 'show';
             this.state2 = 'hide';
+            this.zoom1 = 'active';
 
             // After transition ends set the text/image for the hidden quote
             this.getQuoteAndImageAfterTransition().subscribe(values => {
                 this.quote2 = values[0];
                 this.backgroundImage2 = values[1];
+                this.zoom2 = 'inactive';
             });
         }
     }

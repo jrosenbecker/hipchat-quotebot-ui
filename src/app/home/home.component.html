@@ -1,14 +1,18 @@
 <div class="random-container" (dblclick)="updateOnDoubleClick()">
-    <div class="valign-wrapper max-height image-container" [ngStyle]="backgroundImageStyle(backgroundImage1)" [@crossfade]="state1">
-    <div class="row">
-            <div class="col s12 center quote" >{{quote1?.quote}}</div>
-    </div>
-        
-    </div>
-    <div class="valign-wrapper max-height image-container" [ngStyle]="backgroundImageStyle(backgroundImage2)" [@crossfade]="state2">
-        <div class="row">
-            <div class="col s12 center quote" >{{quote2?.quote}}</div>
+    <div class="zoom-container">
+        <div class="max-height image-container" [ngStyle]="backgroundImageStyle(backgroundImage1)" [@crossfade]="state1" [@zoom]="zoom1"></div>
+        <div class="valign-wrapper quote-container" [@crossfade]="state1">
+            <div class="row">
+                <div class="col s12 center quote" >{{quote1?.quote}}</div>
+            </div> 
+        </div>
+        <div class="max-height image-container" [ngStyle]="backgroundImageStyle(backgroundImage2)" [@crossfade]="state2" [@zoom]="zoom2"></div>
+        <div class="valign-wrapper quote-container" [@crossfade]="state2">
+            <div class="row">
+                <div class="col s12 center quote" >{{quote2?.quote}}</div>
+            </div> 
         </div>
     </div>
+    
 </div>
  
