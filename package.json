@@ -64,6 +64,7 @@
     "nodemon": "^1.17.1",
     "protractor": "~5.1.2",
     "serverless": "^1.26.1",
+    "serverless-domain-manager": "^2.6.6",
     "serverless-finch": "^1.4.0",
     "serverless-offline": "^3.18.0",
     "serverless-webpack": "^4.0.0",

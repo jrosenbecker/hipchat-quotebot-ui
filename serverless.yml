@@ -6,6 +6,7 @@ plugins:
   - serverless-finch
   - serverless-webpack
   - serverless-offline
+  - serverless-domain-manager
 
 provider:
   name: aws
@@ -29,74 +30,14 @@ functions:
           method: ANY
           path: /api/{proxy+}
 
-resources:
-  Resources:
-    CloudFrontDistribution:
-      Type: AWS::CloudFront::Distribution
-      Properties:
-        DistributionConfig:
-          Origins:
-            - DomainName: ${self:custom.client.bucketName}.s3-website-${self:custom.myRegion}.amazonaws.com
-              Id: quotebot-static-s3-site
-              CustomOriginConfig:
-                HTTPPort: '80'
-                HTTPSPort: '443'
-                OriginProtocolPolicy: http-only
-            - DomainName: 
-                Fn::Join: 
-                  - ''
-                  - - Ref: ApiGatewayRestApi
-                    - .execute-api.${self:custom.myRegion}.amazonaws.com
-              OriginPath: '/dev'
-              Id: quotebot-ui-api
-              CustomOriginConfig: 
-                HTTPPort: '80'
-                HTTPSPort: '443'
-                OriginProtocolPolicy: https-only
-          Enabled: 'true'
-          CacheBehaviors:
-            - TargetOriginId: quotebot-ui-api
-              PathPattern: "/api/*"
-              ViewerProtocolPolicy: redirect-to-https
-              MinTTL: '0'
-              MaxTTL: '0'
-              DefaultTTL: '0'
-              AllowedMethods:
-                - HEAD
-                - GET
-              CachedMethods:
-                - HEAD
-                - GET
-              ForwardedValues:
-                QueryString: 'true'
-                Cookies:
-                  Forward: none
-          DefaultCacheBehavior:
-            TargetOriginId: quotebot-static-s3-site
-            ViewerProtocolPolicy: redirect-to-https
-            MinTTL: '0'
-            MaxTTL: '0'
-            DefaultTTL: '0'
-            AllowedMethods:
-              - HEAD
-              - GET
-            ForwardedValues:
-              QueryString: 'true'
-              Cookies:
-                Forward: none
-          PriceClass: PriceClass_100
-          ViewerCertificate:
-            CloudFrontDefaultCertificate: 'true'
-            MinimumProtocolVersion: 'TLSv1'
-          DefaultRootObject: index.html
-          CustomErrorResponses:
-            - ErrorCachingMinTTL: 0
-              ErrorCode: 404
-              ResponseCode: 200
-              ResponsePagePath: '/'
-
 custom:
   myRegion: ${opt:region, 'us-east-1'}
   client:
     bucketName: quotebot-ui-static-angular-app
     distributionFolder: 'dist'
+  customDomain:
+    domainName: api.madisonquotebot.joerosenbecker.com
+    basePath: ''
+    stage: ${self:provider.stage}
+    createRoute53Record: true
+    certificateName: '*.joerosenbecker.com'
