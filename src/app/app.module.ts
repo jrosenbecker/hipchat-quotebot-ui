@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { QuotesService } from './services/quotes.service';
 import { QuoteJsonConverter } from './services/quotejsonconverter.service';
 import { PhotoService } from './services/photo.service';
+import { URLFactory } from './services/url.factory';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { PhotoService } from './services/photo.service';
   providers: [
     QuotesService,
     QuoteJsonConverter,
-    PhotoService
+    PhotoService,
+    URLFactory
   ],
   bootstrap: [AppComponent]
 })

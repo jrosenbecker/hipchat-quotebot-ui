@@ -4,10 +4,10 @@
   "description": "Cycles through quotes overlayed on top of images",
   "main": "handler.js",
   "scripts": {
-    "start": "concurrently --kill-others \"nodemon --config nodemon.json\" \"ng build -w\"",
+    "start": "concurrently --kill-others \"nodemon --config nodemon.json\" \"ng serve\"",
     "start:serverless": "serverless offline start",
-    "debug": "node --debug ./node_modules/.bin/serverless offline -s dev",
-    "deploy": "del-cli dist --force && ng build --prod && serverless client deploy && serverless deploy -v",
+    "debug": "node --inspect ./node_modules/serverless/bin/serverless offline -s dev",
+    "deploy": "del-cli dist --force && ng build --prod && serverless client deploy --stage production && serverless create_domain && serverless deploy -v",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -63,7 +63,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "nodemon": "^1.17.1",
     "protractor": "~5.1.2",
-    "serverless": "^1.26.1",
+    "serverless": "^1.34.1",
     "serverless-domain-manager": "^2.6.6",
     "serverless-finch": "^1.4.0",
     "serverless-offline": "^3.18.0",

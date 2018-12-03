@@ -36,8 +36,8 @@ custom:
     bucketName: quotebot-ui-static-angular-app
     distributionFolder: 'dist'
   customDomain:
-    domainName: api.madisonquotebot.joerosenbecker.com
+    domainName: madisonquotebot.com
     basePath: ''
     stage: ${self:provider.stage}
     createRoute53Record: true
-    certificateName: '*.joerosenbecker.com'
+    certificateName: '*.madisonquotebot.com'

@@ -15,7 +15,7 @@ export class FlickrDataService {
                 }
             };
             const parser = new xml2js.Parser();
-
+            console.log(process.env.FLICKR_PHOTOSET_ID);
             http.get(flickrRequestOptions, (httpError, flickrRes, body) => {
                 if (httpError) {
                     reject(httpError);
