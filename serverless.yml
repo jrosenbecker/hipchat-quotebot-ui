@@ -26,17 +26,21 @@ functions:
       - http:
           method: ANY
           path: /{proxy+}
+          cors: true
       - http:
           method: ANY
           path: /api/{proxy+}
+          cors: true
 
 custom:
   myRegion: ${opt:region, 'us-east-1'}
   client:
-    bucketName: quotebot-ui-static-angular-app
+    bucketName: madisonquotebot.com
     distributionFolder: 'dist'
+    redirect:
+      protocol: https
   customDomain:
-    domainName: madisonquotebot.com
+    domainName: api.madisonquotebot.com
     basePath: ''
     stage: ${self:provider.stage}
     createRoute53Record: true

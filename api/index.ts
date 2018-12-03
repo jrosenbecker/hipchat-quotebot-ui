@@ -1,5 +1,6 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
+import * as cors from 'cors';
 import quotesController from './controllers/quotes-controller';
 import photosController from './controllers/photos-controller';
 import * as path from 'path';
@@ -16,15 +17,11 @@ class AppServer {
     private middleware(): void {
         this.express.use(bodyParser.json());
         this.express.use(bodyParser.urlencoded({ extended: false }));
+        this.express.use(cors());
     }
 
     private routes(): void {
         const router = express.Router();
-        router.use('/', express.static('dist'));
-        router.use('/*', (req, res) => {
-            res.sendFile(path.resolve('dist', 'index.html'));
-        });
-
         this.express.use('/api/quotes', quotesController);
         this.express.use('/api/photos', photosController);
         this.express.use('/', router);
