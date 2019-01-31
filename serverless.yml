@@ -22,6 +22,9 @@ functions:
       FLICKR_KEY: ${file(./serverless.variables.yml):FLICKR_KEY}
       FLICKR_USER_ID: ${file(./serverless.variables.yml):FLICKR_USER_ID}
       FLICKR_PHOTOSET_ID: ${file(./serverless.variables.yml):FLICKR_PHOTOSET_ID}
+      GOOGLE_CLIENT_ID: ${file(./serverless.variables.yml):GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${file(./serverless.variables.yml):GOOGLE_CLIENT_SECRET}
+      GOOGLE_REDIRECT_URI: ${file(./serverless.variables.yml):GOOGLE_REDIRECT_URI}
     events:
       - http:
           method: ANY

@@ -1,6 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
     {
@@ -8,8 +9,8 @@ const appRoutes: Routes = [
         component: HomeComponent
     },
     {
-        path: 'random',
-        redirectTo: ''
+        path: 'login',
+        component: LoginComponent
     }
 ];
 @NgModule({
