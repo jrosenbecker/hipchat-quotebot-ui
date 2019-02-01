@@ -16,15 +16,19 @@ functions:
   api:
     handler: handler.handler
     environment:
-      DYNAMODB_ACCESS_KEY: ${file(./serverless.variables.yml):DYNAMODB_ACCESS_KEY}
-      DYNAMODB_SECRET: ${file(./serverless.variables.yml):DYNAMODB_SECRET}
-      DYNAMODB_REGION: ${file(./serverless.variables.yml):DYNAMODB_REGION}
-      FLICKR_KEY: ${file(./serverless.variables.yml):FLICKR_KEY}
-      FLICKR_USER_ID: ${file(./serverless.variables.yml):FLICKR_USER_ID}
-      FLICKR_PHOTOSET_ID: ${file(./serverless.variables.yml):FLICKR_PHOTOSET_ID}
-      GOOGLE_CLIENT_ID: ${file(./serverless.variables.yml):GOOGLE_CLIENT_ID}
-      GOOGLE_CLIENT_SECRET: ${file(./serverless.variables.yml):GOOGLE_CLIENT_SECRET}
-      GOOGLE_REDIRECT_URI: ${file(./serverless.variables.yml):GOOGLE_REDIRECT_URI}
+      DYNAMODB_ACCESS_KEY: ${file(./serverless.variables.${self:provider.stage, 'dev'}.yml):DYNAMODB_ACCESS_KEY}
+      DYNAMODB_SECRET: ${file(./serverless.variables.${self:provider.stage, 'dev'}.yml):DYNAMODB_SECRET}
+      DYNAMODB_REGION: ${file(./serverless.variables.${self:provider.stage, 'dev'}.yml):DYNAMODB_REGION}
+      DYNAMODB_AUTHORIZATION_ACCESS_KEY: ${file(./serverless.variables.${self:provider.stage, 'dev'}.yml):DYNAMODB_AUTHORIZATION_ACCESS_KEY}
+      DYNAMODB_AUTHORIZATION_SECRET: ${file(./serverless.variables.${self:provider.stage, 'dev'}.yml):DYNAMODB_AUTHORIZATION_SECRET}
+      DYNAMODB_AUTHORIZATION_REGION: ${file(./serverless.variables.${self:provider.stage, 'dev'}.yml):DYNAMODB_AUTHORIZATION_REGION}
+      FLICKR_KEY: ${file(./serverless.variables.${self:provider.stage, 'dev'}.yml):FLICKR_KEY}
+      FLICKR_USER_ID: ${file(./serverless.variables.${self:provider.stage, 'dev'}.yml):FLICKR_USER_ID}
+      FLICKR_PHOTOSET_ID: ${file(./serverless.variables.${self:provider.stage, 'dev'}.yml):FLICKR_PHOTOSET_ID}
+      GOOGLE_CLIENT_ID: ${file(./serverless.variables.${self:provider.stage, 'dev'}.yml):GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${file(./serverless.variables.${self:provider.stage, 'dev'}.yml):GOOGLE_CLIENT_SECRET}
+      GOOGLE_REDIRECT_URI: ${file(./serverless.variables.${self:provider.stage, 'dev'}.yml):GOOGLE_REDIRECT_URI}
+      FRONT_END_DOMAIN: ${file(./serverless.variables.${self:provider.stage, 'dev'}.yml):FRONT_END_DOMAIN}
     events:
       - http:
           method: ANY

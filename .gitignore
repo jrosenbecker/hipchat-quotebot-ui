@@ -122,3 +122,4 @@ Thumbs.db
 
 # Secrets
 serverless.variables.yml
+serverless.variables.*.yml

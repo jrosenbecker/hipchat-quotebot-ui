@@ -2,17 +2,16 @@ import * as AWS from 'aws-sdk';
 import * as DOC from 'dynamodb-doc';
 import * as rn from 'random-number';
 
-AWS.config.update({
-    accessKeyId: process.env.DYNAMODB_ACCESS_KEY,
-    secretAccessKey: process.env.DYNAMODB_SECRET,
-    region: process.env.DYNAMODB_REGION
-});
-
-const awsDynamoClient = new AWS.DynamoDB();
-const docClient = new DOC.DynamoDB(awsDynamoClient);
 
 export class QuotesDataService {
     getRandomQuote() {
+        AWS.config.update({
+            accessKeyId: process.env.DYNAMODB_ACCESS_KEY,
+            secretAccessKey: process.env.DYNAMODB_SECRET,
+            region: process.env.DYNAMODB_REGION
+        });
+        const awsDynamoClient = new AWS.DynamoDB();
+
         return awsDynamoClient.scan({
             TableName: 'Quotes'
         }).promise().then((data) => {
