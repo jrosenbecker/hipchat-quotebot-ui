@@ -5,7 +5,7 @@
   "main": "handler.js",
   "scripts": {
     "start": "concurrently --kill-others \"nodemon --config nodemon.json\" \"ng serve\"",
-    "start:serverless": "serverless offline start",
+    "start:serverless": "serverless offline start -s dev",
     "debug": "node --inspect ./node_modules/serverless/bin/serverless offline -s dev",
     "deploy": "del-cli dist --force && ng build --prod && serverless create_domain && serverless client deploy && serverless deploy -v",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -38,6 +38,7 @@
     "materialize-css": "^0.100.2",
     "moment": "^2.24.0",
     "morgan": "^1.9.0",
+    "ngx-cookie-service": "^2.1.0",
     "path": "^0.12.7",
     "random-number": "0.0.9",
     "request": "^2.85.0",

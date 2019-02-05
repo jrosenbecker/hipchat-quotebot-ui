@@ -3,12 +3,9 @@ import { NgModule } from '@angular/core';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { TokenComponent } from './token/token.component';
+import { AuthGuard } from './guards/authguard.service';
 
 const appRoutes: Routes = [
-    {
-        path: '',
-        component: HomeComponent
-    },
     {
         path: 'login',
         component: LoginComponent
@@ -16,6 +13,11 @@ const appRoutes: Routes = [
     {
         path: 'token',
         component: TokenComponent
+    },
+    {
+        path: '',
+        canActivate: [AuthGuard],
+        component: HomeComponent
     }
 ];
 @NgModule({

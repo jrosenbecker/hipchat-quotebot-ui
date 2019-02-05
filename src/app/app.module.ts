@@ -12,10 +12,14 @@ import { PhotoService } from './services/photo.service';
 import { URLFactory } from './services/url.factory';
 import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TokenComponent } from './token/token.component';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guards/authguard.service';
+import { TokenInterceptor } from './interceptors/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -32,10 +36,18 @@ import { TokenComponent } from './token/token.component';
     BrowserAnimationsModule
   ],
   providers: [
+    AuthService,
+    AuthGuard,
     QuotesService,
     QuoteJsonConverter,
     PhotoService,
-    URLFactory
+    URLFactory,
+    CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

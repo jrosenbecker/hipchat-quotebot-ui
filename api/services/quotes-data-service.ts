@@ -11,6 +11,7 @@ export class QuotesDataService {
             region: process.env.DYNAMODB_REGION
         });
         const awsDynamoClient = new AWS.DynamoDB();
+        const docClient = new DOC.DynamoDB(awsDynamoClient);
 
         return awsDynamoClient.scan({
             TableName: 'Quotes'

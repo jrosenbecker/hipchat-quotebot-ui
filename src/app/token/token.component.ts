@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
     templateUrl: './token.component.html'
@@ -11,14 +12,24 @@ export class TokenComponent implements OnInit {
     expiry_date: string;
     token_type: string;
 
-    constructor(private route: ActivatedRoute) {}
+    constructor(private _route: ActivatedRoute, private _authService: AuthService, private _router: Router) {}
 
     ngOnInit(): void {
-        this.access_token = this.route.snapshot.queryParamMap.get('access_token');
-        this.id_token = this.route.snapshot.queryParamMap.get('id_token');
-        this.refresh_token =  this.route.snapshot.queryParamMap.get('refresh_token');
-        this.expiry_date =  this.route.snapshot.queryParamMap.get('expiry_date');
-        this.token_type = this.route.snapshot.queryParamMap.get('token_type');
+        const accessToken = this._route.snapshot.queryParamMap.get('access_token');
+        const idToken = this._route.snapshot.queryParamMap.get('id_token');
+        const refreshToken = this._route.snapshot.queryParamMap.get('refresh_token');
+        const expiryDate = this._route.snapshot.queryParamMap.get('expiry_date');
+
+        this.expiry_date = expiryDate;
+        this._authService.setCredentials({
+            accessToken,
+            idToken,
+            expiryDate,
+            refreshToken
+        });
+
+
+        this._router.navigate(['/']);
     }
 
 }
