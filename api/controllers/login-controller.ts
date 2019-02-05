@@ -4,6 +4,7 @@ import * as jwt_decode from 'jwt-decode';
 import * as url from 'url';
 import { AuthorizationService } from '../services/authorization-service';
 import { oAuthService } from '../services/google-oauth-service';
+import * as http from 'request';
 
 class PhotoRouter {
     router: Router;
@@ -47,9 +48,11 @@ class PhotoRouter {
                 const decodedIdentity = jwt_decode(tokenResponse.tokens.id_token);
 
                 const service = new AuthorizationService();
-                service.isAuthorized(decodedIdentity.email).then(isAuthorized => {
+                service.isEmailWhitelisted(decodedIdentity.email).then(isAuthorized => {
                     if (isAuthorized) {
-                        res.redirect(redirectUrl);
+                        service.saveSession(decodedIdentity.email, tokenResponse.tokens.access_token, tokenResponse.tokens.id_token)
+                            .then((data) => res.redirect(redirectUrl))
+                            .catch(error => res.sendStatus(500));
                     } else {
                         res.sendStatus(403);
                     }
@@ -60,10 +63,41 @@ class PhotoRouter {
             });
         });
 
+        this.router.post('/refresh', (req: Request, res: Response) => {
+            const refreshToken = req.body.refresh_token;
+            http.post('https://www.googleapis.com/oauth2/v4/token', {
+                form: {
+                    client_id: process.env.GOOGLE_CLIENT_ID,
+                    client_secret: process.env.GOOGLE_CLIENT_SECRET,
+                    grant_type: 'refresh_token',
+                    refresh_token: refreshToken
+                }
+            }, (error, response) => {
+                if (error) {
+                    console.error(error);
+                    res.sendStatus(500);
+                } else {
+                    const body = JSON.parse(response.body);
+                    const decodedIdentity = jwt_decode(body.id_token);
+
+                    const service = new AuthorizationService();
+                    service.isEmailWhitelisted(decodedIdentity.email).then(isAuthorized => {
+                        if (isAuthorized) {
+                            service.saveSession(decodedIdentity.email, body.access_token, body.id_token)
+                                .then((data) => res.send(body.access_token))
+                                .catch(() => res.sendStatus(500));
+                        } else {
+                            res.sendStatus(403);
+                        }
+                    });
+                }
+            });
+        });
+
         this.router.get('/test', (req: Request, res: Response) => {
             const service = new AuthorizationService();
 
-            service.isAuthorized('joe.rosenbecker@centare.com').then(result => res.send(result)).catch(err => res.send(err));
+            service.isAuthorized(req.headers.authorization).then(result => res.send(result)).catch(err => res.send(err));
         });
     }
 }

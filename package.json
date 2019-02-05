@@ -36,7 +36,7 @@
     "jquery": "^3.3.1",
     "jwt-decode": "^2.2.0",
     "materialize-css": "^0.100.2",
-    "moment": "^2.21.0",
+    "moment": "^2.24.0",
     "morgan": "^1.9.0",
     "path": "^0.12.7",
     "random-number": "0.0.9",

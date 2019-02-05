@@ -22,6 +22,7 @@ functions:
       DYNAMODB_AUTHORIZATION_ACCESS_KEY: ${file(./serverless.variables.${self:provider.stage, 'dev'}.yml):DYNAMODB_AUTHORIZATION_ACCESS_KEY}
       DYNAMODB_AUTHORIZATION_SECRET: ${file(./serverless.variables.${self:provider.stage, 'dev'}.yml):DYNAMODB_AUTHORIZATION_SECRET}
       DYNAMODB_AUTHORIZATION_REGION: ${file(./serverless.variables.${self:provider.stage, 'dev'}.yml):DYNAMODB_AUTHORIZATION_REGION}
+      AUTHORIZATION_TABLE_NAME: ${file(./serverless.variables.${self:provider.stage, 'dev'}.yml):AUTHORIZATION_TABLE_NAME}
       FLICKR_KEY: ${file(./serverless.variables.${self:provider.stage, 'dev'}.yml):FLICKR_KEY}
       FLICKR_USER_ID: ${file(./serverless.variables.${self:provider.stage, 'dev'}.yml):FLICKR_USER_ID}
       FLICKR_PHOTOSET_ID: ${file(./serverless.variables.${self:provider.stage, 'dev'}.yml):FLICKR_PHOTOSET_ID}

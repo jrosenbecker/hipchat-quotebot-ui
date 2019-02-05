@@ -5,6 +5,7 @@ import quotesController from './controllers/quotes-controller';
 import photosController from './controllers/photos-controller';
 import * as path from 'path';
 import loginController from './controllers/login-controller';
+import { checkAuthorization } from './middleware/authorization-middleware';
 
 class AppServer {
     public express: express.Application;
@@ -23,8 +24,8 @@ class AppServer {
 
     private routes(): void {
         const router = express.Router();
-        this.express.use('/api/quotes', quotesController);
-        this.express.use('/api/photos', photosController);
+        this.express.use('/api/quotes', checkAuthorization, quotesController);
+        this.express.use('/api/photos', checkAuthorization, photosController);
         this.express.use('/login', loginController);
         this.express.use('/', router);
     }
