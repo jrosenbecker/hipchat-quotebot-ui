@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { take } from 'rxjs/operators';
 
 @Component({
     templateUrl: './token.component.html'
@@ -31,5 +32,6 @@ export class TokenComponent implements OnInit {
 
         this._router.navigate(['/']);
     }
+
 
 }

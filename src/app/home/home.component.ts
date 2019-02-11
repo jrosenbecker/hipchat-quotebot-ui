@@ -5,6 +5,8 @@ import { PhotoService } from '../services/photo.service';
 import { Photo } from '../models/photo';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
+import { AuthService } from '../services/auth.service';
+import { take } from 'rxjs/operators';
 
 const TRANSITION_TIME_SECONDS = 2;
 
@@ -40,7 +42,7 @@ export class HomeComponent implements OnInit {
     private refreshRateMinutes = 5;
     private clickEnabled: boolean;
 
-    constructor(private _quotesService: QuotesService, private _photoService: PhotoService) { }
+    constructor(private _quotesService: QuotesService, private _photoService: PhotoService, private _authService: AuthService) { }
 
     ngOnInit(): void {
         this.backgroundImage1 = new Photo();
@@ -66,6 +68,11 @@ export class HomeComponent implements OnInit {
 
         // Begin a scheduled transition
         this.setSchedule(this.refreshRateMinutes);
+    }
+
+
+    refreshAccessToken() {
+        this._authService.refreshAccessToken().pipe(take(1)).subscribe();
     }
 
     backgroundImageStyle(backgroundImage: Photo): any {
