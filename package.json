@@ -7,7 +7,7 @@
     "start": "concurrently --kill-others \"nodemon --config nodemon.json\" \"ng serve\"",
     "start:serverless": "serverless offline start -s dev",
     "debug": "node --inspect ./node_modules/serverless/bin/serverless offline -s dev",
-    "deploy": "del-cli dist --force && ng build --prod && serverless create_domain && serverless client deploy && serverless deploy -v",
+    "deploy": "del-cli dist --force && ng build --prod && serverless create_domain -s prod && serverless client deploy -s prod && serverless deploy -s prod -v",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -36,6 +36,7 @@
     "jquery": "^3.3.1",
     "jwt-decode": "^2.2.0",
     "materialize-css": "^0.100.2",
+    "mdbootstrap": "^4.7.1",
     "moment": "^2.24.0",
     "morgan": "^1.9.0",
     "ngx-cookie-service": "^2.1.0",

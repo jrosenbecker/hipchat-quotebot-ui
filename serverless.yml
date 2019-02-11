@@ -10,6 +10,7 @@ plugins:
 
 provider:
   name: aws
+  stage: ${opt:stage, 'dev'}
   runtime: nodejs6.10
 
 functions:
@@ -45,6 +46,7 @@ custom:
   client:
     bucketName: madisonquotebot.com
     distributionFolder: 'dist'
+    errorDocument: index.html
     redirect:
       protocol: https
   customDomain:

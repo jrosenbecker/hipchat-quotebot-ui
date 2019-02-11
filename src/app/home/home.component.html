@@ -1,4 +1,4 @@
-<button (click)="logout()">Logout</button>
+
 <div class="random-container" (dblclick)="updateOnDoubleClick()">
     <div class="zoom-container">
         <div class="max-height image-container" [ngStyle]="backgroundImageStyle(backgroundImage1)" [@crossfade]="state1" [@zoom]="zoom1"></div>
@@ -13,7 +13,12 @@
                 <div class="col s12 center quote" >{{quote2?.quote}}</div>
             </div> 
         </div>
+        <div class="row">
+            <div id="logoutContainer" class="col s12 right-align">
+                <button id="logoutButton" (click)="logout()" class="btn btn-flat waves-effect waves-light transparent">Logout</button>
+            </div>
+            
+        </div>
     </div>
-    
 </div>
  

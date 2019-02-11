@@ -43,3 +43,11 @@
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
 }
+
+#logoutContainer {
+    margin-top: 10px;
+}
+
+#logoutButton {
+    color: whitesmoke;
+}
