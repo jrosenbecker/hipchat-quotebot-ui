@@ -2,7 +2,6 @@ import * as AWS from 'aws-sdk';
 import { oAuthService } from './google-oauth-service';
 import * as jwt_decode from 'jwt-decode';
 import { IDToken } from '../models/id-token';
-import * as DOC from 'dynamodb-doc';
 import * as moment from 'moment';
 
 const AUTHORIZATION_TABLE_NAME  = process.env.AUTHORIZATION_TABLE_NAME;

@@ -44,6 +44,7 @@
     "random-number": "0.0.9",
     "request": "^2.85.0",
     "rxjs": "^5.5.6",
+    "uid-generator": "^1.0.0",
     "url": "^0.11.0",
     "xml2js": "^0.4.19",
     "zone.js": "^0.8.19"
