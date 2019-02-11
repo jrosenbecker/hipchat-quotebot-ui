@@ -84,7 +84,9 @@ class PhotoRouter {
                     service.isEmailWhitelisted(decodedIdentity.email).then(isAuthorized => {
                         if (isAuthorized) {
                             service.saveSession(decodedIdentity.email, body.access_token, body.id_token)
-                                .then((data) => res.send(body.access_token))
+                                .then((data) => res.json({
+                                    access_token: body.access_token
+                                }))
                                 .catch(() => res.sendStatus(500));
                         } else {
                             res.sendStatus(403);

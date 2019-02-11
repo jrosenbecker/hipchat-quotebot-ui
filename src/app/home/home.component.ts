@@ -71,8 +71,8 @@ export class HomeComponent implements OnInit {
     }
 
 
-    refreshAccessToken() {
-        this._authService.refreshAccessToken().pipe(take(1)).subscribe();
+    logout() {
+        this._authService.logout();
     }
 
     backgroundImageStyle(backgroundImage: Photo): any {

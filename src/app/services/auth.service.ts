@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { URLFactory } from './url.factory';
 import { Observable } from 'rxjs/Observable';
 import { flatMap, map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
@@ -44,16 +45,17 @@ export class AuthService {
         return this._cookieService.get('access_token');
     }
 
-    refreshAccessToken(): Observable<void> {
+    refreshAccessToken(): Observable<string> {
         return this._http.post<any>(this._urlFactory.createUrl('/login/refresh'), {
             refresh_token: this._cookieService.get('refresh_token')
         }).pipe(map((accessTokenResponse) => {
-            this._cookieService.set('access_token', accessTokenResponse.body);
+            this._cookieService.set('access_token', accessTokenResponse.access_token);
+            return accessTokenResponse.access_token;
         }));
     }
 
     logout(): void {
         this._cookieService.deleteAll();
-        this._router.navigate(['/']);
+        window.location.href = environment.homeUrl;
     }
 }

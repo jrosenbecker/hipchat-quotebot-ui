@@ -5,10 +5,10 @@ import { environment } from '../../environments/environment';
 @Component({
     templateUrl: './login.component.html'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
     constructor(private _router: Router) { }
 
-    ngOnInit() {
+    login() {
         window.location.href = `${environment.apiUrl}/login`;
     }
 }
