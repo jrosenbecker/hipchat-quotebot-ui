@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-add-quote-modal',
@@ -7,4 +7,5 @@ import { Component, Input, ViewChild } from '@angular/core';
 })
 export class AddQuoteModalComponent {
     @Input() modalName: string;
+
 }

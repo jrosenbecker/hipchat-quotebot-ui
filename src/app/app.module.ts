@@ -20,6 +20,9 @@ import { AuthGuard } from './guards/authguard.service';
 import { TokenInterceptor } from './interceptors/token-interceptor.service';
 import { RefreshTokenInterceptor } from './interceptors/refresh-token-interceptor.service';
 import { AddQuoteModalComponent } from './home/add-quote-modal/add-quote-modal';
+import { TextInputComponent } from './components/text-input/text-input';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { AddQuoteFormComponent } from './forms/add-quote-form';
 
 @NgModule({
   declarations: [
@@ -27,13 +30,17 @@ import { AddQuoteModalComponent } from './home/add-quote-modal/add-quote-modal';
     HomeComponent,
     LoginComponent,
     TokenComponent,
-    AddQuoteModalComponent
+    AddQuoteModalComponent,
+    TextInputComponent,
+    AddQuoteFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthService,
