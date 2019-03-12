@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { HttpClient } from '@angular/common/http';
 import { URLFactory } from './url.factory';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { flatMap, map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 

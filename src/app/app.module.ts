@@ -1,6 +1,3 @@
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/observable/forkJoin';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routes';
 import { HomeComponent } from './home/home.component';

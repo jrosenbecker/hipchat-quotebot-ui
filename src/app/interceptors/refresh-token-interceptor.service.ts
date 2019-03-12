@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { filter, switchMap, take, catchError } from 'rxjs/operators';
 
@@ -20,12 +20,12 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
                 if (request.url.includes('refresh')) {
                     this._authService.logout();
                 }
-                return Observable.throw(error);
+                return throwError(error);
             }
 
             // Only try to refresh if a 401 response was received
             if (error.status !== 401) {
-                return Observable.throw(error);
+                return throwError(error);
             }
 
             if (this.refreshTokenInProgress) {
@@ -48,7 +48,7 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
                         }),
                         catchError((err: any) => {
                             this.refreshTokenInProgress = false;
-                            return Observable.throw(err);
+                            return throwError(err);
                         })
                     );
             }

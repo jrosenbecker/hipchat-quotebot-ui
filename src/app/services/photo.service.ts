@@ -1,6 +1,6 @@
 import { URLFactory } from './url.factory';
 import { Quote } from '../models/quote';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Photo } from '../models/photo';

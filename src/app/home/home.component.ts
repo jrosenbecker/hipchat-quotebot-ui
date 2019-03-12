@@ -1,13 +1,11 @@
-import { Component, OnInit, trigger, state, style, transition, animate, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Quote } from '../models/quote';
 import { QuotesService } from '../services/quotes.service';
 import { PhotoService } from '../services/photo.service';
 import { Photo } from '../models/photo';
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
+import { Observer, Observable, forkJoin } from 'rxjs';
 import { AuthService } from '../services/auth.service';
-import { take } from 'rxjs/operators';
-import { AddQuoteModalComponent } from './add-quote-modal/add-quote-modal';
 
 const TRANSITION_TIME_SECONDS = 2;
 
@@ -119,11 +117,11 @@ export class HomeComponent implements OnInit {
     private getQuoteAndImage(): Observable<[Quote, Photo]> {
         const quoteObservable = this._quotesService.getRandom();
         const imageObservable = this._photoService.getRandom();
-        return Observable.forkJoin(quoteObservable, imageObservable);
+        return forkJoin(quoteObservable, imageObservable);
     }
 
     private getQuoteAndImageAfterTransition(): Observable<[Quote, Photo]> {
-        return Observable.create((observer: Observer<[Quote, Photo]>) => {
+        return new Observable((observer: Observer<[Quote, Photo]>) => {
             this.clickEnabled = false;
             setTimeout(() => {
                 this.getQuoteAndImage().subscribe(values => {

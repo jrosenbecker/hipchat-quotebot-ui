@@ -1,6 +1,5 @@
 import { Request, NextFunction, Response } from 'express';
 import { AuthorizationService } from '../services/authorization-service';
-import { P } from '@angular/core/src/render3';
 
 export function checkAuthorization(req: Request, res: Response, next: NextFunction) {
     if (req.headers.authorization) {

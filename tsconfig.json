@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "importHelpers": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -17,6 +18,8 @@
       "es5",
       "es2015.promise",
       "esnext.asynciterable"
-    ]
+    ],
+    "module": "es2015",
+    "baseUrl": "./"
   }
 }
