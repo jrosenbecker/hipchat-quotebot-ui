@@ -20,13 +20,15 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/authguard.service';
 import { TokenInterceptor } from './interceptors/token-interceptor.service';
 import { RefreshTokenInterceptor } from './interceptors/refresh-token-interceptor.service';
+import { AddQuoteModalComponent } from './home/add-quote-modal/add-quote-modal';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    TokenComponent
+    TokenComponent,
+    AddQuoteModalComponent
   ],
   imports: [
     BrowserModule,

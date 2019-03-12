@@ -1,4 +1,4 @@
-import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
+import { Component, OnInit, trigger, state, style, transition, animate, ViewChild } from '@angular/core';
 import { Quote } from '../models/quote';
 import { QuotesService } from '../services/quotes.service';
 import { PhotoService } from '../services/photo.service';
@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { AuthService } from '../services/auth.service';
 import { take } from 'rxjs/operators';
+import { AddQuoteModalComponent } from './add-quote-modal/add-quote-modal';
 
 const TRANSITION_TIME_SECONDS = 2;
 

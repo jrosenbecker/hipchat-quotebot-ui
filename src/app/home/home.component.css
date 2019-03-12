@@ -48,6 +48,6 @@
     margin-top: 10px;
 }
 
-#logoutButton {
+#logoutContainer .btn {
     color: whitesmoke;
 }
