@@ -1,7 +1,6 @@
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/observable/forkJoin';
-import { MaterializeModule } from 'angular2-materialize';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routes';
 import { HomeComponent } from './home/home.component';
@@ -32,7 +31,6 @@ import { AddQuoteModalComponent } from './home/add-quote-modal/add-quote-modal';
   ],
   imports: [
     BrowserModule,
-    MaterializeModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule
