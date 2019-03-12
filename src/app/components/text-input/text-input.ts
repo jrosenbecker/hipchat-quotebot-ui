@@ -36,10 +36,10 @@ export class TextInputComponent implements ControlValueAccessor {
     }
 
     touched() {
-        this.onTouched();
+        this.onTouched(this.value);
     }
 
     valueUpdated() {
-        this.onModelChange();
+        this.onModelChange(this.value);
     }
 }

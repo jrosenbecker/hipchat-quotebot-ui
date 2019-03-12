@@ -19,7 +19,6 @@ import { RefreshTokenInterceptor } from './interceptors/refresh-token-intercepto
 import { AddQuoteModalComponent } from './home/add-quote-modal/add-quote-modal';
 import { TextInputComponent } from './components/text-input/text-input';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { AddQuoteFormComponent } from './forms/add-quote-form';
 
 @NgModule({
   declarations: [
@@ -29,7 +28,6 @@ import { AddQuoteFormComponent } from './forms/add-quote-form';
     TokenComponent,
     AddQuoteModalComponent,
     TextInputComponent,
-    AddQuoteFormComponent
   ],
   imports: [
     BrowserModule,

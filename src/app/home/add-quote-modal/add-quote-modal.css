@@ -1,3 +1,7 @@
 #headerText {
     color: black;
 }
+
+.modal {
+    max-width: 700px;
+}

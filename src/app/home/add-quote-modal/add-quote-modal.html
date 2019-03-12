@@ -1,9 +1,19 @@
 <div [id]="modalName" class="modal">
-    <div class="modal-content">
-        <h4 id="headerText">Add A Quote</h4>
-        <app-add-quote-form></app-add-quote-form>
-    </div>
-    <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
+    <form [formGroup]="addQuoteForm" (ngSubmit)="saveQuote()">
+        <div class="modal-content">
+            <h4 id="headerText">Add A Quote</h4>
+            <div clas="row">
+                <div class="col s12">
+                    <app-text-input field="quote" label="Quote" formControlName="quote"></app-text-input>
+                </div>
+                <div class="col s12">
+                    <app-text-input field="whoSaidIt" label="Who said it?" formControlName="whoSaidIt"></app-text-input>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="modal-close waves-effect waves-green btn">Save Quote</button>
+            <button type="button" class="modal-close waves-effect waves-green btn-flat">Cancel</button>
+        </div>
+    </form>
 </div>
