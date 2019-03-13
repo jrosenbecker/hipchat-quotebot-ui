@@ -2,9 +2,16 @@ import * as AWS from 'aws-sdk';
 import * as DOC from 'dynamodb-doc';
 import * as rn from 'random-number';
 import { Quote } from '../models/quote';
+import { QuoteValidatorService } from './quote-validator-service';
 
 
 export class QuotesDataService {
+    private _quoteValidator: QuoteValidatorService;
+
+    constructor() {
+        this._quoteValidator = new QuoteValidatorService();
+    }
+
     getRandomQuote() {
         AWS.config.update({
             accessKeyId: process.env.DYNAMODB_ACCESS_KEY,
@@ -31,7 +38,11 @@ export class QuotesDataService {
         });
     }
 
-    saveQuote(quote: Quote) {
+    saveQuote(quote: Quote): Promise<any> {
+        if (!this._quoteValidator.isQuoteValid(quote)) {
+            return Promise.reject('Quote was not valid');
+        }
+
         AWS.config.update({
             accessKeyId: process.env.DYNAMODB_ACCESS_KEY,
             secretAccessKey: process.env.DYNAMODB_SECRET,
@@ -44,6 +55,6 @@ export class QuotesDataService {
         return docClient.putItem({
             TableName: 'Quotes',
             Item: quote,
-        });
+        }).promise();
     }
 }

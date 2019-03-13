@@ -33,4 +33,11 @@ export class QuotesService {
                     })
                 );
     }
+
+    saveQuote(quote: string, quotee: string): Observable<void> {
+        return this._http.post<void>(this._urlFactory.createUrl('/api/quotes'), {
+            Quote: quote,
+            Quotee: quotee
+        });
+    }
 }

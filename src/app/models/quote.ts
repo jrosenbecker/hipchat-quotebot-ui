@@ -1,8 +1,8 @@
 import { Moment } from 'moment';
 
 export class Quote {
-    quotee: String;
-    addedBy: String;
-    quote: String;
+    quotee: string;
+    addedBy: string;
+    quote: string;
     addedOn: Moment;
 }

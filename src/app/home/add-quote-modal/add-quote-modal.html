@@ -1,4 +1,4 @@
-<div [id]="modalName" class="modal">
+<div [id]="modalName" class="modal" #modalRef>
     <form [formGroup]="addQuoteForm" (ngSubmit)="saveQuote()">
         <div class="modal-content">
             <h4 id="headerText">Add A Quote</h4>
@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="submit" class="modal-close waves-effect waves-green btn">Save Quote</button>
+            <button type="submit" class="modal-close waves-effect waves-green btn" [disabled]="!addQuoteForm.valid || isSaving">Save Quote</button>
             <button type="button" class="modal-close waves-effect waves-green btn-flat">Cancel</button>
         </div>
     </form>

@@ -19,6 +19,7 @@ import { RefreshTokenInterceptor } from './interceptors/refresh-token-intercepto
 import { AddQuoteModalComponent } from './home/add-quote-modal/add-quote-modal';
 import { TextInputComponent } from './components/text-input/text-input';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     LoginComponent,
     TokenComponent,
     AddQuoteModalComponent,
-    TextInputComponent,
+    TextInputComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +36,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     AuthService,

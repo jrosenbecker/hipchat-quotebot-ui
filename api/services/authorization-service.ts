@@ -12,6 +12,30 @@ const AUTHORIZATION_TABLE_CONFIG = {
 };
 
 export class AuthorizationService {
+    getUserName(accessToken: string): Promise<string> {
+        AWS.config.update(AUTHORIZATION_TABLE_CONFIG);
+        const awsDynamoClient = new AWS.DynamoDB();
+
+        if (accessToken.includes('Bearer ')) {
+            accessToken = accessToken.replace('Bearer ', '');
+        }
+
+        return awsDynamoClient.scan({
+            TableName: AUTHORIZATION_TABLE_NAME,
+            ExpressionAttributeValues: {
+                ':at': { S: accessToken }
+            },
+            FilterExpression: 'accessToken = :at'
+        }).promise().then((data) => {
+            if (data.Count === 1) {
+                const user = data.Items[0];
+                return user['name'].S;
+            }
+
+            return null;
+        });
+    }
+
     isAuthorized(accessToken: string): Promise<boolean> {
         AWS.config.update(AUTHORIZATION_TABLE_CONFIG);
         const awsDynamoClient = new AWS.DynamoDB();
@@ -53,7 +77,8 @@ export class AuthorizationService {
         return awsDynamoClient.updateItem({
             ExpressionAttributeNames: {
                 '#AT': 'accessToken',
-                '#EXP': 'expires'
+                '#EXP': 'expires',
+                '#NAME': 'name'
             },
             ExpressionAttributeValues: {
                 ':at': {
@@ -61,9 +86,12 @@ export class AuthorizationService {
                 },
                 ':exp': {
                     N: expires.toString()
+                },
+                ':name': {
+                    S: decodedID.name
                 }
             },
-            UpdateExpression: 'SET #AT = :at, #EXP = :exp',
+            UpdateExpression: 'SET #AT = :at, #EXP = :exp, #NAME = :name',
             TableName: AUTHORIZATION_TABLE_NAME,
             Key: {
                 email: {
