@@ -33,7 +33,7 @@ export class FlickrDataService {
                             integer: true
                         });
                         const photo = photos[index].$;
-                        const url = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_h.jpg`;
+                        const url = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_b.jpg`;
 
                         resolve(url);
                     });
